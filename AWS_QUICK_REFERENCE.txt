@@ -1,0 +1,274 @@
+# AWS Deployment Files - Quick Reference Card
+
+```
+╔════════════════════════════════════════════════════════════════════════════╗
+║                   CARWHEELS AWS DEPLOYMENT - QUICK REF                     ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+┌─ START HERE ──────────────────────────────────────────────────────────────┐
+│                                                                            │
+│  📄 START_HERE_AWS.md ⭐⭐⭐                                             │
+│  └─ READ THIS FIRST! (5 minutes)                                          │
+│     ├─ Decision tree for your path                                        │
+│     ├─ Quick 5-minute action plan                                         │
+│     ├─ File summary                                                       │
+│     └─ Links to all other resources                                       │
+│                                                                            │
+└────────────────────────────────────────────────────────────────────────────┘
+
+┌─ FOR QUICK DEPLOYMENT ────────────────────────────────────────────────────┐
+│                                                                            │
+│  📄 QUICK_START_AWS.md ⭐⭐                                              │
+│  └─ 30-minute deployment guide                                            │
+│     ├─ Prerequisites (5 min)                                              │
+│     ├─ 5-step deployment (20 min)                                         │
+│     ├─ Common operations                                                  │
+│     └─ Cost estimates                                                     │
+│                                                                            │
+│  Command:                                                                  │
+│  $ cd infrastructure                                                       │
+│  $ terraform apply                                                         │
+│                                                                            │
+└────────────────────────────────────────────────────────────────────────────┘
+
+┌─ FOR VISUAL LEARNERS ──────────────────────────────────────────────────────┐
+│                                                                            │
+│  📄 AWS_VISUAL_GUIDE.md ⭐⭐                                             │
+│  └─ Diagrams and visualizations (20 min)                                  │
+│     ├─ Architecture diagrams                                              │
+│     ├─ Data flow visualization                                            │
+│     ├─ Deployment timeline                                                │
+│     ├─ Auto-scaling visualization                                         │
+│     └─ Security layers                                                    │
+│                                                                            │
+└────────────────────────────────────────────────────────────────────────────┘
+
+┌─ FOR DETAILED STEPS ──────────────────────────────────────────────────────┐
+│                                                                            │
+│  📄 docs/AWS_DEPLOYMENT.md (50 pages)                                     │
+│  └─ Comprehensive guide (30+ min read)                                    │
+│     ├─ RDS PostgreSQL setup                                               │
+│     ├─ ElastiCache Redis setup                                            │
+│     ├─ EC2 deployment                                                     │
+│     ├─ Nginx & SSL setup                                                  │
+│     ├─ Domain & Route 53                                                  │
+│     ├─ Monitoring & backups                                               │
+│     └─ Production checklist                                               │
+│                                                                            │
+└────────────────────────────────────────────────────────────────────────────┘
+
+┌─ IF SOMETHING BREAKS ─────────────────────────────────────────────────────┐
+│                                                                            │
+│  📄 docs/AWS_TROUBLESHOOTING.md                                           │
+│  └─ Problem solver guide (15+ min)                                        │
+│     ├─ 10 common issues with solutions                                    │
+│     ├─ Debugging commands                                                 │
+│     ├─ Prevention tips                                                    │
+│     └─ Getting help resources                                             │
+│                                                                            │
+│  Common Issues:                                                            │
+│  1. RDS connection failed                                                 │
+│  2. Redis connection failed                                               │
+│  3. EC2 not receiving traffic                                             │
+│  4. SSL certificate issues                                                │
+│  5. High CPU/memory usage                                                 │
+│  6. Database performance issues                                           │
+│  7. Cost overages                                                         │
+│  8. Terraform state issues                                                │
+│  9. DNS not resolving                                                     │
+│  10. Application won't start                                              │
+│                                                                            │
+└────────────────────────────────────────────────────────────────────────────┘
+
+┌─ INFRASTRUCTURE CODE ─────────────────────────────────────────────────────┐
+│                                                                            │
+│  📁 infrastructure/                                                        │
+│  │                                                                         │
+│  ├─ 📄 main.tf (1000+ lines) ⭐⭐⭐⭐⭐                                  │
+│  │  └─ Complete AWS infrastructure definition                             │
+│  │     ├─ VPC with subnets                                                │
+│  │     ├─ RDS PostgreSQL                                                  │
+│  │     ├─ ElastiCache Redis                                               │
+│  │     ├─ EC2 Auto Scaling                                                │
+│  │     ├─ Application Load Balancer                                       │
+│  │     ├─ S3 + CloudFront                                                 │
+│  │     ├─ Route 53 DNS                                                    │
+│  │     ├─ CloudWatch monitoring                                           │
+│  │     └─ Security groups & IAM                                           │
+│  │                                                                         │
+│  ├─ 📄 terraform.tfvars                                                   │
+│  │  └─ Configuration (EDIT BEFORE DEPLOYING!)                             │
+│  │     ├─ AWS region                                                      │
+│  │     ├─ Domain name                                                     │
+│  │     ├─ Database password                                               │
+│  │     └─ Instance type                                                   │
+│  │                                                                         │
+│  ├─ 📄 user_data.sh                                                       │
+│  │  └─ EC2 startup script (runs automatically)                            │
+│  │     ├─ Installs Node.js 18                                             │
+│  │     ├─ Sets up PM2                                                     │
+│  │     ├─ Configures Nginx                                                │
+│  │     └─ Clones and starts app                                           │
+│  │                                                                         │
+│  └─ 📄 deploy.sh                                                          │
+│     └─ Automated deployment script                                        │
+│        ├─ Runs terraform init                                             │
+│        ├─ Runs terraform apply                                            │
+│        ├─ Runs health checks                                              │
+│        └─ Sets up alerts                                                  │
+│                                                                            │
+└────────────────────────────────────────────────────────────────────────────┘
+
+┌─ DEPLOYMENT TIMELINE ─────────────────────────────────────────────────────┐
+│                                                                            │
+│  ⏱️  Total Time: ~50 minutes                                             │
+│  │                                                                         │
+│  ├─ Install tools ..................... 5 min (one-time)                  │
+│  ├─ Read quick start .................. 5 min                             │
+│  ├─ Edit configuration ................ 5 min                             │
+│  ├─ Deploy infrastructure ............. 20 min ⚙️                        │
+│  │  ├─ terraform init (2 min)                                             │
+│  │  ├─ terraform apply (15 min)                                           │
+│  │  └─ EC2 setup (in background)                                          │
+│  │                                                                         │
+│  ├─ Configure domain .................. 5 min                             │
+│  └─ Test & verify ..................... 5 min                             │
+│                                                                            │
+│  ✅ Done! Your app is live on AWS                                         │
+│                                                                            │
+└────────────────────────────────────────────────────────────────────────────┘
+
+┌─ WHAT GETS CREATED ───────────────────────────────────────────────────────┐
+│                                                                            │
+│  AWS Services                          Status         Cost                │
+│  ─────────────────────────────────────────────────────────────           │
+│  ✅ VPC (Virtual Network)              Production     Included            │
+│  ✅ RDS PostgreSQL (Multi-AZ)          Production     $30/month          │
+│  ✅ ElastiCache Redis (HA)             Production     $25/month          │
+│  ✅ EC2 Instances (2-4 auto-scale)     Production     $40-80/month       │
+│  ✅ Application Load Balancer          Production     $16/month          │
+│  ✅ S3 Bucket                          Production     $1/month            │
+│  ✅ CloudFront CDN                     Production     $5/month            │
+│  ✅ Route 53 DNS                       Production     $0.50/month         │
+│  ✅ CloudWatch Monitoring              Production     $5/month            │
+│  ✅ Auto Scaling Group                 Production     Included            │
+│                                                                            │
+│  Total Monthly Cost: ~$110-165 (or $0-50 with Free Tier!)               │
+│                                                                            │
+└────────────────────────────────────────────────────────────────────────────┘
+
+┌─ QUICK START COMMANDS ────────────────────────────────────────────────────┐
+│                                                                            │
+│  # 1. Install prerequisites                                               │
+│  # AWS CLI: https://awscli.amazonaws.com/AWSCLIV2.msi                    │
+│  # Terraform: https://www.terraform.io/downloads.html                    │
+│                                                                            │
+│  # 2. Configure AWS                                                       │
+│  $ aws configure                                                          │
+│  # Enter: AWS Access Key ID                                               │
+│  # Enter: AWS Secret Access Key                                           │
+│  # Enter: Default region = us-east-1                                      │
+│                                                                            │
+│  # 3. Edit configuration                                                  │
+│  $ cd infrastructure                                                       │
+│  $ nano terraform.tfvars                                                  │
+│  # Update: domain_name, db_password                                       │
+│                                                                            │
+│  # 4. Deploy                                                              │
+│  $ terraform init                                                         │
+│  $ terraform validate                                                     │
+│  $ terraform apply                                                        │
+│  # Type: yes                                                              │
+│  # Wait: 15 minutes...                                                    │
+│                                                                            │
+│  # 5. Verify                                                              │
+│  $ terraform output                                                       │
+│  # Copy ALB DNS name and update domain DNS records                        │
+│                                                                            │
+│  # 6. Monitor                                                             │
+│  $ aws logs tail /carwheels/api --follow                                 │
+│                                                                            │
+│  # Done! 🎉                                                              │
+│                                                                            │
+└────────────────────────────────────────────────────────────────────────────┘
+
+┌─ TROUBLESHOOTING QUICK REFERENCE ─────────────────────────────────────────┐
+│                                                                            │
+│  Problem                      Solution                                    │
+│  ──────────────────────────────────────────────────────────────           │
+│  AWS CLI not found             Install from: https://aws.amazon.com      │
+│  Terraform not found           Install from: https://terraform.io        │
+│  Credentials error             Run: aws configure                         │
+│  Terraform init fails          Check: aws sts get-caller-identity        │
+│  Terraform apply times out     Check AWS service quotas                  │
+│  EC2 not responding            Check: aws logs tail /carwheels/api       │
+│  Database connection fails     Check: Security group rules                │
+│  DNS not working               Wait: 15-30 min for propagation           │
+│  502 Bad Gateway               SSH to instance, run: pm2 status          │
+│                                                                            │
+│  Read: docs/AWS_TROUBLESHOOTING.md for detailed solutions                │
+│                                                                            │
+└────────────────────────────────────────────────────────────────────────────┘
+
+┌─ YOUR ACTION PLAN ────────────────────────────────────────────────────────┐
+│                                                                            │
+│  [ ] 1. Read START_HERE_AWS.md (5 min)                                   │
+│  [ ] 2. Install AWS CLI & Terraform (5 min)                              │
+│  [ ] 3. Run: aws configure (1 min)                                       │
+│  [ ] 4. Edit: infrastructure/terraform.tfvars (5 min)                    │
+│  [ ] 5. Run: terraform apply (20 min)                                    │
+│  [ ] 6. Update domain DNS records (5 min)                                │
+│  [ ] 7. Deploy frontend to Vercel (5 min)                                │
+│  [ ] 8. Test: curl https://api.carwheels.com/health (1 min)              │
+│  [ ] 9. View logs: aws logs tail /carwheels/api --follow (2 min)         │
+│  [ ] 10. Done! 🎉                                                        │
+│                                                                            │
+│  Total Time: ~50 minutes                                                  │
+│                                                                            │
+└────────────────────────────────────────────────────────────────────────────┘
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║  🚀 READY TO DEPLOY? START HERE:                                         ║
+║                                                                            ║
+║  👉 Read: START_HERE_AWS.md (first file)                                 ║
+║  👉 Then: QUICK_START_AWS.md (quick deployment)                          ║
+║  👉 Then: terraform apply (deploy everything)                            ║
+║                                                                            ║
+║  Need help? Read: docs/AWS_TROUBLESHOOTING.md                            ║
+║                                                                            ║
+║  Your CarWheels app will be live on AWS in ~50 minutes! 🎉               ║
+║                                                                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+```
+
+---
+
+## 📞 File Decision Tree
+
+```
+START HERE: START_HERE_AWS.md
+│
+├─ "I want to deploy in 30 minutes"
+│  └─ Read: QUICK_START_AWS.md
+│
+├─ "I like visual explanations"
+│  └─ Read: AWS_VISUAL_GUIDE.md
+│
+├─ "I want all the details"
+│  └─ Read: docs/AWS_DEPLOYMENT.md
+│
+├─ "Something went wrong"
+│  └─ Read: docs/AWS_TROUBLESHOOTING.md
+│
+├─ "I want to understand the architecture"
+│  └─ Read: docs/AWS_ARCHITECTURE.md
+│
+└─ "I want to understand the code"
+   └─ Read: infrastructure/main.tf
+```
+
+---
+
+**You have everything you need. Let's get started!** 🚀
+
